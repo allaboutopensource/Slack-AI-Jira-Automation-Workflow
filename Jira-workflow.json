@@ -7,7 +7,7 @@
           "__rl": true,
           "value": "14574",
           "mode": "list",
-          "cachedResultName": "IT - Infrastructure Services"
+          "cachedResultName": "AI Services"
         },
         "issueType": {
           "__rl": true,
@@ -32,7 +32,7 @@
       "notesInFlow": false,
       "credentials": {
         "jiraSoftwareCloudApi": {
-          "id": "GQj5kLxDrNNEYzeI",
+          "id": "GQj5kLxfdcrsdYzeI",
           "name": "Jira SW Cloud account"
         }
       },
@@ -53,7 +53,7 @@
       "name": "Delete an issue in Jira Software",
       "credentials": {
         "jiraSoftwareCloudApi": {
-          "id": "GQj5kLxDrNNEYzeI",
+          "id": "GQj5kLxfdcrsdYzeI",
           "name": "Jira SW Cloud account"
         }
       }
@@ -76,7 +76,7 @@
       "name": "Update an issue in Jira Software",
       "credentials": {
         "jiraSoftwareCloudApi": {
-          "id": "GQj5kLxDrNNEYzeI",
+          "id": "GQj5kLxfdcrsdYzeI",
           "name": "Jira SW Cloud account"
         }
       }
@@ -220,7 +220,7 @@
       "name": "Get an issue in Jira Software",
       "credentials": {
         "jiraSoftwareCloudApi": {
-          "id": "GQj5kLxDrNNEYzeI",
+          "id": "GQj5kLxfdcrsdYzeI",
           "name": "Jira SW Cloud account"
         }
       }
