@@ -1,0 +1,372 @@
+{
+  "name": "Jira-workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "14574",
+          "mode": "list",
+          "cachedResultName": "IT - Infrastructure Services"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10002",
+          "mode": "list",
+          "cachedResultName": "Task"
+        },
+        "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        560,
+        288
+      ],
+      "id": "cd7a42ff-6bd6-4ce2-8a44-2a1bef4ec3b9",
+      "name": "Create an issue in Jira Software",
+      "alwaysOutputData": true,
+      "notesInFlow": false,
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQj5kLxDrNNEYzeI",
+          "name": "Jira SW Cloud account"
+        }
+      },
+      "notes": "This is an AI assistant for Jira software"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        832,
+        208
+      ],
+      "id": "c1e06195-1b04-446e-8c8a-b6005b39062e",
+      "name": "Delete an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQj5kLxDrNNEYzeI",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "issueKey": "={{ $json.issueKey }}",
+        "updateFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        944,
+        96
+      ],
+      "id": "944db4d6-83c3-491c-95d9-5bb60c922b87",
+      "name": "Update an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQj5kLxDrNNEYzeI",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "anthropic.claude-3-haiku-20240307-v1:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        208
+      ],
+      "id": "49c7bdfa-3223-4148-9ae4-fb8fda0b78d5",
+      "name": "AWS Bedrock Chat Model",
+      "notesInFlow": true,
+      "credentials": {
+        "aws": {
+          "id": "v1DJqK48AJSnWKmu",
+          "name": "AWS account 2"
+        }
+      },
+      "notes": "This is an AI assistant for Jira software"
+    },
+    {
+      "parameters": {
+        "options": {
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "2dc418c8-5261-479e-9e83-d700bd5ca83a",
+      "name": "AI Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C012KD99U30",
+          "mode": "list",
+          "cachedResultName": "itops-slack"
+        },
+        "text": "={{ $json.output }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        848,
+        -64
+      ],
+      "id": "4f653ab5-3b66-432f-aa10-20aa6134a969",
+      "name": "Send a message",
+      "webhookId": "024c2cf5-2bd7-42db-b61d-a896391104d5",
+      "credentials": {
+        "slackApi": {
+          "id": "hFX7FQ4tCE1kG7sq",
+          "name": "Slack-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "app_mention"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C012KD99U30",
+          "mode": "list",
+          "cachedResultName": "itops-slack"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "c13bed1e-c265-47d5-aadb-525fac8a99d8",
+      "name": "Slack Trigger",
+      "webhookId": "b6da0e54-ba14-43c9-95ea-c50362c67268",
+      "alwaysOutputData": true,
+      "notesInFlow": true,
+      "credentials": {
+        "slackApi": {
+          "id": "hFX7FQ4tCE1kG7sq",
+          "name": "Slack-API"
+        }
+      },
+      "notes": "It gets trigger when someone in the channel mention the slack bot/app"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce2a8912-81f0-4a47-993a-cc6e28be7290",
+              "name": "chatInput",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        0
+      ],
+      "id": "6dd58c0d-a413-4cb7-be6e-692c078b930a",
+      "name": "Edit Fields",
+      "notesInFlow": true,
+      "notes": "Data Transformation "
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        736,
+        352
+      ],
+      "id": "5308f74e-a7d2-4d69-8f2e-7621fc4167dc",
+      "name": "Get an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQj5kLxDrNNEYzeI",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        448,
+        208
+      ],
+      "id": "00aa5661-9abb-427a-b3ec-0179896949f4",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Create an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "saveExecutionProgress": true,
+    "timeSavedPerExecution": 1
+  },
+  "versionId": "b673c19c-9de1-4d95-abba-63d35d29e2b6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "81c18456f44bc437cd858be7338481595cba4dc22e764508df60722e5685375e"
+  },
+  "id": "75NHDKCU6yJz8IRE",
+  "tags": [
+    {
+      "createdAt": "2025-10-14T18:34:48.210Z",
+      "updatedAt": "2025-10-14T18:34:48.210Z",
+      "id": "BCfNGg6kIpDc2Qo0",
+      "name": "jira"
+    },
+    {
+      "createdAt": "2025-10-14T18:34:53.881Z",
+      "updatedAt": "2025-10-14T18:34:53.881Z",
+      "id": "Qpw4U3TyDwlVRX5x",
+      "name": "agent"
+    }
+  ]
+}
