@@ -23,6 +23,30 @@ This repository contains an n8n workflow that integrates Slack, AWS Bedrock (Ant
 3. **Jira Node**: Executes the appropriate action (create/update/delete/status).
 4. **Slack Message Node**: Sends a response back to the user confirming the action.
 
-## 📁 Repository Structure
-
 <img width="1491" height="612" alt="image" src="https://github.com/user-attachments/assets/f78c6497-35b9-468d-820a-98b713fee2f0" />
+
+
+
+## 🔧 Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/<your-username>/slack-ai-jira-automation-workflow.git
+
+
+2) Import Workflow into n8n
+
+Open your n8n instance.
+Import the slack-ai-jira-workflow.json file.
+
+
+3) Configure Environment Variables
+
+Slack Bot Token & Signing Secret
+AWS Bedrock credentials
+Jira API credentials
+
+4) Deploy and Test
+
+Mention the Slack bot with a command like:
+@your-bot create a Jira ticket for login issue in project ABC
