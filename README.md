@@ -24,3 +24,5 @@ This repository contains an n8n workflow that integrates Slack, AWS Bedrock (Ant
 4. **Slack Message Node**: Sends a response back to the user confirming the action.
 
 ## 📁 Repository Structure
+
+<img width="1491" height="612" alt="image" src="https://github.com/user-attachments/assets/f78c6497-35b9-468d-820a-98b713fee2f0" />
